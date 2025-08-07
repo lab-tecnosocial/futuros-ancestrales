@@ -1,0 +1,22 @@
+{"type":"FeatureCollection", "features":[
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.640582,-14.989991]},"properties":{"Id":0,"Nombre":"Subcentral TIMI","entidad_te":"Territorio Indígena Mojeño Ignaciano (TIMI)","latitud":-14.989991,"longitud":-65.640582}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.710918,-14.922655]},"properties":{"Id":0,"Nombre":"Comunidad San Miguel del Mátire","entidad_te":"Territorio Indígena Mojeño Ignaciano (TIMI)","latitud":-14.922655,"longitud":-65.710918}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.749327,-14.736978]},"properties":{"Id":0,"Nombre":"Comunidad Mercedes del Apere","entidad_te":"TIM","latitud":-14.736978,"longitud":-65.749327}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.443928,-14.909758]},"properties":{"Id":0,"Nombre":"Comunidad Santa Rita","entidad_te":null,"latitud":-14.909758,"longitud":-65.443928}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.883013,-15.156038]},"properties":{"Id":0,"Nombre":"San Miguel del Apere","entidad_te":"TIM","latitud":-15.156038,"longitud":-65.883013}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.973833,-15.26113]},"properties":{"Id":0,"Nombre":"San José del Kavitu","entidad_te":"TIM","latitud":-15.26113,"longitud":-65.973833}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.552947,-15.55772]},"properties":{"Id":0,"Nombre":"Misión San Lorenzo de Moxos","entidad_te":null,"latitud":-15.55772,"longitud":-65.552947}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.326766,-14.828285]},"properties":{"Id":0,"Nombre":"Comunidad Argentina","entidad_te":"Territorio Indígena Mojeño Ignaciano (TIMI)","latitud":-14.828285,"longitud":-65.326766}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.562717,-14.948536]},"properties":{"Id":0,"Nombre":"Comunidad El Chontal","entidad_te":"Territorio Indígena Mojeño Ignaciano (TIMI)","latitud":-14.948536,"longitud":-65.562717}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.61372,-14.989487]},"properties":{"Id":0,"Nombre":"Comunidad Algodonal","entidad_te":"Territorio Indígena Mojeño Ignaciano (TIMI)","latitud":-14.989487,"longitud":-65.61372}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.348502,-14.913468]},"properties":{"Id":0,"Nombre":"Comunidad Fatima","entidad_te":"Territorio Indígena Mojeño Ignaciano (TIMI)","latitud":-14.913468,"longitud":-65.348502}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.377654,-14.89428]},"properties":{"Id":0,"Nombre":"Comunidad Bermeo","entidad_te":"Territorio Indígena Mojeño Ignaciano (TIMI)","latitud":-14.89428,"longitud":-65.377654}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.901789,-14.969014]},"properties":{"Id":0,"Nombre":"Comunidad Santa Rosa de Aguas Negras","entidad_te":"TIM","latitud":-14.969014,"longitud":-65.901789}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.883975,-14.962019]},"properties":{"Id":0,"Nombre":"Comunidad Palmar de Aguas Negras","entidad_te":"Territorio Indígena Mojeño Ignaciano (TIMI)","latitud":-14.962019,"longitud":-65.883975}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.591917,-14.967396]},"properties":{"Id":0,"Nombre":"Comunidad Bella Brisa","entidad_te":"Territorio Indígena Mojeño Ignaciano (TIMI)","latitud":-14.967396,"longitud":-65.591917}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.573869,-14.972061]},"properties":{"Id":0,"Nombre":"Comunidad Litoral","entidad_te":"Territorio Indígena Mojeño Ignaciano (TIMI)","latitud":-14.972061,"longitud":-65.573869}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.646688,-15.037926]},"properties":{"Id":0,"Nombre":"Comunidad Monte Grande","entidad_te":null,"latitud":-15.037926,"longitud":-65.646688}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.63846,-14.961458]},"properties":{"Id":0,"Nombre":"Comunidad Nueva Brisa","entidad_te":null,"latitud":-14.961458,"longitud":-65.63846}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.717965,-14.87748]},"properties":{"Id":0,"Nombre":"Comunidad Santa Anita del Matire","entidad_te":"Territorio Indígena Mojeño Ignaciano (TIMI)","latitud":-14.87748,"longitud":-65.717965}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.62853,-14.603102]},"properties":{"Id":0,"Nombre":"Pueblo “El Peru”","entidad_te":null,"latitud":-14.603102,"longitud":-65.62853}}
+]}

@@ -1,0 +1,191 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mapa del Gran Moxos. Futuros Ancestrales</title>
+
+  <link rel="stylesheet" href="style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <nav style="display: flex; justify-content: space-between; align-items: center;">
+    <h3>FUTUROS ANCESTRALES</h3>
+    <div style="display:flex; margin: 20px; gap: 25px; color: white;">
+    <a class="menu-item">Nosotrxs</a>
+    <a class="menu-item">Cartografías anticoloniales</a>
+    <a class="menu-item">Contacto</a>
+    </div>
+  </nav>
+
+  <div id="mapa"></div>
+
+  <!-- Modal for fullscreen images -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-ajax/dist/leaflet.ajax.min.js"></script>
+
+  <script>
+    const isMobile = window.innerWidth <= 768;
+
+    let map = L.map('mapa', {
+      scrollWheelZoom: !isMobile,
+    }).setView([-14.99, -65.63], 10); 
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      maxZoom: 19,
+      attribution: '&copy; Elaborado por el <a href="https://labtecnosocial.org/">Lab TecnoSocial</a>'
+    }).addTo(map);
+
+// Datos de comunidades
+    var comunidades = L.geoJSON.ajax("data/comunidades_mapeadas.geojson", {
+      pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, { icon: iconComunidad });
+      },
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`
+          <b>${feature.properties['Nombre']}</b><br>
+          <b>Entidad territorial: </b>${feature.properties['entidad_te']}
+        `);
+      }
+    });
+
+    const iconComunidad = L.icon({
+      iconUrl: 'icons/casa.png',
+      iconSize: [36, 38],
+      iconAnchor: [15, 40],
+      popupAnchor: [0, -35]
+    });
+
+    comunidades.addTo(map);
+
+// moxos-historias
+    var historias = L.geoJSON.ajax("data/moxos_historias.geojson", {
+      pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, { icon: iconHistorias });
+      },
+      onEachFeature: function (feature, layer) {
+        const imageUrl = `moxos_atach/${feature.properties['foto1']}`;
+        const audioUrl = `moxos_atach/${feature.properties['audio']}`;
+
+        layer.bindPopup(`
+        <img src='${imageUrl}' class='imagen' /> <br>
+          <b>${feature.properties['Name']}</b><br>
+          <a${feature.properties['enlace']}>Enlace</a><br>
+          <audio controls  >
+            <source src=${audioUrl}/>
+        </audio>
+        `);
+      }
+    });
+
+    const iconHistorias = L.icon({
+      iconUrl: 'icons/historia.png',
+      iconSize: [30, 32],
+      iconAnchor: [15, 40],
+      popupAnchor: [0, -35]
+    });
+
+    historias.addTo(map);
+
+// datos de rios
+    var rios = L.geoJSON.ajax("data/rios_moxos.geojson", {
+      style: function (feature) {
+        return { color: '#1E90FF', weight: 1.5 , opacity: 0.3};
+      },
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`
+          <b>Río: </b>${feature.properties['NOMBRE']}
+        `);
+      }
+    });
+
+    rios.addTo(map);
+
+// datos de hitos
+    var hitos = L.geoJSON.ajax("data/moxos_hitos.geojson", {
+      pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, { icon: iconHitos });
+      },
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`
+          <b>${feature.properties['Nombre']}</b>
+        `);
+      }
+    });
+
+    const iconHitos = L.icon({
+      iconUrl: 'icons/hito.png',
+      iconSize: [38, 40],
+      iconAnchor: [15, 40],
+      popupAnchor: [0, -35]
+    });
+
+    hitos.addTo(map);
+
+// datos de areas protegidas
+    var territoriosIndigenas = L.geoJSON.ajax("data/territorios_indigenas.geojson", {
+      style: function (feature) {
+        return { color: '#32CD32', weight: 1, fillColor: '#32CD32', fillOpacity: 0.2 }; 
+      },
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`
+          <b>Área Protegida: </b>${feature.properties['NOMBRE']}
+        `);
+      }
+    });
+
+    territoriosIndigenas.addTo(map);
+
+// datos de limite de moxos
+    var limiteMoxos = L.geoJSON.ajax("data/limite_moxos.geojson", {
+      style: function (feature) {
+        return { color: '#FF0000', weight: 2, opacity: 0.2 };
+      },
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`
+          <b>Límite de Moxos</b>
+        `);
+      }
+    });
+
+    limiteMoxos.addTo(map);
+
+// datos de limite de pueblos indigenas
+    var limitePueblosIndigenas = L.geoJSON.ajax("data/limite_pueblos_moxos.geojson", {
+      style: function (feature) {
+        return { color: '#FF8C00', weight: 2, opacity: 0.2 };
+      },
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`
+          <b>Límite de Pueblos Indígenas</b>
+        `);
+      }
+    });
+
+    limitePueblosIndigenas.addTo(map);
+
+// Control de capas
+const baseLayers = {};
+
+const overlays = {
+    "Comunidades": comunidades,
+    "Historias": historias,
+    "Ríos": rios,
+    "Hitos": hitos,
+    "Territorios Indígenas": territoriosIndigenas,
+    "Límite de Moxos": limiteMoxos,
+    "Límite de Pueblos de Moxos": limitePueblosIndigenas
+};
+
+L.control.layers(baseLayers, overlays, { collapsed: false }).addTo(map);
+
+map.removeLayer(rios);
+map.removeLayer(hitos);
+map.removeLayer(territoriosIndigenas);
+map.removeLayer(limiteMoxos);
+
+  </script>
+</body>

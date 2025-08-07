@@ -1,0 +1,12 @@
+{"type":"FeatureCollection", "features":[
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.636108,-14.994271]},"properties":{"Id":0,"Nombre":"Escuela de Música","latitud":-14.994271,"longitud":-65.636108}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.641041,-14.995605]},"properties":{"Id":0,"Nombre":"Parroquia de San Ignacio","latitud":-14.995605,"longitud":-65.641041}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.641179,-14.996201]},"properties":{"Id":0,"Nombre":"Plaza Central de San Ignacio de Moxos","latitud":-14.996201,"longitud":-65.641179}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.640783,-14.99587]},"properties":{"Id":0,"Nombre":"Museo San Ignacio","latitud":-14.99587,"longitud":-65.640783}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.640613,-14.992097]},"properties":{"Id":0,"Nombre":"Casa de Achus","latitud":-14.992097,"longitud":-65.640613}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.639454,-14.994481]},"properties":{"Id":0,"Nombre":"Plaza del “Jocheo de Toros”","latitud":-14.994481,"longitud":-65.639454}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.640783,-14.99587]},"properties":{"Id":0,"Nombre":"Museo San Ignacio","latitud":-14.99587,"longitud":-65.640783}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.638089,-14.997134]},"properties":{"Id":0,"Nombre":"Casa Macheteros","latitud":-14.997134,"longitud":-65.638089}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.636954,-14.992283]},"properties":{"Id":0,"Nombre":"Casa de Wasus","latitud":-14.992283,"longitud":-65.636954}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[-65.638663,-14.991074]},"properties":{"Id":0,"Nombre":"Casa de Los Judios","latitud":-14.991074,"longitud":-65.638663}}
+]}

@@ -1,7 +1,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Mapa del Gran Moxos. Futuros Ancestrales</title>
+  <title>Mapa del G layer.bindPopup(`
+    ${slideshowHTML}
+    <div class="popup-content">
+      <b>${feature.properties['Name']}</b>
+      <audio controls>
+        <source src='${feature.properties[' audio']}' />
+      </audio><br>
+      <a href='${feature.properties[' enlace']}'>Conoce más</a>
+    </div>
+    `);
+    }
+    });uturos Ancestrales
+  </title>
 
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -130,14 +142,45 @@
         return L.marker(latlng, { icon: iconHistorias });
       },
       onEachFeature: function (feature, layer) {
+        // Crear array de imágenes válidas
+        const images = [];
+        if (feature.properties['foto1']) images.push(feature.properties['foto1']);
+        if (feature.properties['foto2']) images.push(feature.properties['foto2']);
+        if (feature.properties['foto3']) images.push(feature.properties['foto3']);
+
+        // Generar el HTML del slideshow
+        let slideshowHTML = '';
+        if (images.length > 1) {
+          slideshowHTML = `
+            <div class="slideshow-container">
+              <div class="slides">
+                ${images.map((img, index) => `
+                  <div class="slide ${index === 0 ? 'active' : ''}">
+                    <img src="${img}" class="imagen" />
+                  </div>
+                `).join('')}
+              </div>
+              <div class="slideshow-controls">
+                <button class="prev-btn" onclick="changeSlide(this, -1)">❮</button>
+                <span class="slide-counter">1 / ${images.length}</span>
+                <button class="next-btn" onclick="changeSlide(this, 1)">❯</button>
+              </div>
+            </div>
+          `;
+        } else if (images.length === 1) {
+          slideshowHTML = `<img src="${images[0]}" class="imagen" />`;
+        }
+
         layer.bindPopup(`
-        <img src='${feature.properties['foto1']}' class='imagen' /> <br>
-          <b>${feature.properties['Name']}</b>
-          <audio controls  >
-            <source src='${feature.properties['audio']}'/>
-        </audio><br>
-        <a href='${feature.properties['enlace']}'>Conoce más</a>
-        `)
+          ${slideshowHTML}
+          <div class="popup-content">
+            <b>${feature.properties['Name']}</b>
+            <audio controls>
+              <source src='${feature.properties['audio']}'/>
+            </audio><br>
+            <a href='${feature.properties['enlace']}'>Conoce más</a>
+          </div>
+        `);
       }
     });
 
@@ -358,6 +401,29 @@
     map.removeLayer(incendios);
     map.removeLayer(limitePueblosIndigenas);
     map.removeLayer(abundancia);
+
+    // Función para controlar el slideshow
+    window.changeSlide = function (button, direction) {
+      const slideshowContainer = button.closest('.slideshow-container');
+      const slides = slideshowContainer.querySelectorAll('.slide');
+      const counter = slideshowContainer.querySelector('.slide-counter');
+
+      let currentSlide = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+
+      // Remover clase active del slide actual
+      slides[currentSlide].classList.remove('active');
+
+      // Calcular nuevo índice
+      currentSlide += direction;
+      if (currentSlide >= slides.length) currentSlide = 0;
+      if (currentSlide < 0) currentSlide = slides.length - 1;
+
+      // Agregar clase active al nuevo slide
+      slides[currentSlide].classList.add('active');
+
+      // Actualizar contador
+      counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+    };
 
   </script>
 </body>

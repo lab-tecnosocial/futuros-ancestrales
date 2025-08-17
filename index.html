@@ -231,7 +231,37 @@
     // datos de areas protegidas
     var territoriosIndigenas = L.geoJSON.ajax("data/territorios_indigenas.geojson", {
       style: function (feature) {
-        return { color: '#CCC', weight: 1, fillColor: '#32CD32', fillOpacity: 0.2 };
+        // Paleta de colores suaves pero diferenciados para cada territorio
+        const colorPalette = {
+          'Baure': '#90EE90',           // Verde claro
+          'Canichana': '#FFB6C1',       // Rosa claro
+          'Cavineño': '#87CEEB',        // Azul cielo
+          'Cayubaba': '#DDA0DD',        // Ciruela claro
+          'Chácobo - Pacahuara': '#F0E68C', // Caqui claro
+          'Consejo Tsiname': '#FFA07A',  // Salmón claro
+          'Isiboro Secure (TIPNIS)': '#20B2AA', // Verde mar claro
+          'Itonama': '#AFEEEE',         // Turquesa pálido
+          'Joaquiniano': '#F5DEB3',     // Trigo
+          'Mojeño Ignaciano': '#98FB98', // Verde pálido
+          'Moré': '#E6E6FA',            // Lavanda
+          'Movima': '#FFEFD5',          // Papaya
+          'Movima II': '#FFE4E1',       // Rosa bruma
+          'Multiétnico (TIM)': '#E0FFFF', // Cian claro
+          'Sirionó': '#F0FFFF',         // Azul alice
+          'Takana - Cavineño': '#FAFAD2', // Vara de oro claro
+          'Takana III': '#D3D3D3',      // Gris claro
+          'Yuracare (Coniyura)': '#FFFFE0' // Amarillo claro
+        };
+
+        const territoryName = feature.properties['name'];
+        const fillColor = colorPalette[territoryName] || '#32CD32'; // Default green
+
+        return {
+          color: '#666',
+          weight: 1,
+          fillColor: fillColor,
+          fillOpacity: 0.4
+        };
       },
       onEachFeature: function (feature, layer) {
         layer.bindPopup(`

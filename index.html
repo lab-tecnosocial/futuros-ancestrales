@@ -13,11 +13,65 @@
 
 <body>
   <nav style="display: flex; justify-content: space-between; align-items: center;">
-    <h3>FUTUROS ANCESTRALES</h3>
-    <div style="display:flex; margin: 20px; gap: 25px; color: white;">
-    <a class="menu-item">Nosotrxs</a>
-    <a class="menu-item">Cartografías anticoloniales</a>
-    <a class="menu-item">Contacto</a>
+    <a href="index.html"><h3>FUTUROS ANCESTRALES</h3></a>
+    <!-- Hamburger menu for mobile -->
+    <div class="menu-container">
+      <div class="menu-items">
+        <a class="menu-item" href="nosotrxs.html">Nosotrxs</a>
+        <a class="menu-item" href="cartografias.html">Cartografías anticoloniales</a>
+        <a class="menu-item" href="contacto.html">Contacto</a>
+      </div>
+      <button class="hamburger" aria-label="Abrir menú">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <script>
+      const hamburger = document.querySelector('.hamburger');
+      const menuItems = document.querySelector('.menu-items');
+      hamburger.addEventListener('click', () => {
+        menuItems.classList.toggle('show');
+      });
+    </script>
+    <style>
+    .menu-container {
+      display: flex;
+      align-items: center;
+    }
+    .menu-items {
+      display: flex;
+      gap: 25px;
+      color: white;
+    }
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8em;
+      margin-left: 15px;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .menu-items {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: #222;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+        border-radius: 8px;
+        z-index: 1000;
+      }
+      .menu-items.show {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+    }
+    </style>
     </div>
   </nav>
 
@@ -34,9 +88,9 @@
       scrollWheelZoom: !isMobile,
     }).setView([-14.99, -65.63], 10); 
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      maxZoom: 19,
-      attribution: '&copy; Elaborado por el <a href="https://labtecnosocial.org/">Lab TecnoSocial</a>'
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      maxZoom: 20,
+      attribution: '&copy; Desarrollado por el <a href="https://labtecnosocial.org/">Lab TecnoSocial</a>'
     }).addTo(map);
 
 // Datos de comunidades
@@ -67,17 +121,14 @@
         return L.marker(latlng, { icon: iconHistorias });
       },
       onEachFeature: function (feature, layer) {
-        const imageUrl = `moxos_atach/${feature.properties['foto1']}`;
-        const audioUrl = `moxos_atach/${feature.properties['audio']}`;
-
         layer.bindPopup(`
-        <img src='${imageUrl}' class='imagen' /> <br>
-          <b>${feature.properties['Name']}</b><br>
-          <a${feature.properties['enlace']}>Enlace</a><br>
+        <img src='${feature.properties['foto1']}' class='imagen' /> <br>
+          <b>${feature.properties['Name']}</b>
           <audio controls  >
-            <source src=${audioUrl}/>
-        </audio>
-        `);
+            <source src='${feature.properties['audio']}'/>
+        </audio><br>
+        <a href='${feature.properties['enlace']}'>Conoce más</a>
+        `)
       }
     });
 
@@ -128,11 +179,11 @@
 // datos de areas protegidas
     var territoriosIndigenas = L.geoJSON.ajax("data/territorios_indigenas.geojson", {
       style: function (feature) {
-        return { color: '#32CD32', weight: 1, fillColor: '#32CD32', fillOpacity: 0.2 }; 
+        return { color: '#CCC', weight: 1, fillColor: '#32CD32', fillOpacity: 0.2 }; 
       },
       onEachFeature: function (feature, layer) {
         layer.bindPopup(`
-          <b>Área Protegida: </b>${feature.properties['NOMBRE']}
+          <b>Territorio indígena: </b>${feature.properties['name']}
         `);
       }
     });
@@ -167,25 +218,68 @@
 
     limitePueblosIndigenas.addTo(map);
 
+// datos de incendios
+    var incendios = L.geoJSON.ajax("data/incendio.geojson", {
+      style: function (feature) {
+        return { color: '#FF4500', weight: 2, opacity: 0.5 };
+      },
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`
+          <b>Incendio: </b>${feature.properties['NOMBRE']}
+        `);
+      }
+    });
+
+    incendios.addTo(map);
+
+// datos de abundancia
+var abundancia = L.geoJSON.ajax("data/abundancia_limpia.geojson", {
+  pointToLayer: function (feature, latlng) {
+    const iconPath = `icons/${feature.properties['extension']}`;
+    const iconAbundancia = L.icon({
+      iconUrl: iconPath,
+      iconSize: [32, 34],
+      iconAnchor: [15, 40],
+      popupAnchor: [0, -35]
+    });
+    return L.marker(latlng, { icon: iconAbundancia });
+  },
+  onEachFeature: function (feature, layer) {
+    layer.bindPopup(`
+      <b>${feature.properties['Tipo']}</b>
+    `);
+  }
+});
+
+abundancia.addTo(map);
+
 // Control de capas
 const baseLayers = {};
 
 const overlays = {
-    "Comunidades": comunidades,
-    "Historias": historias,
-    "Ríos": rios,
-    "Hitos": hitos,
-    "Territorios Indígenas": territoriosIndigenas,
-    "Límite de Moxos": limiteMoxos,
-    "Límite de Pueblos de Moxos": limitePueblosIndigenas
+  // 1. Geo-grafías: La historia que narra la tierra
+  "Comunidades": comunidades,
+  "Límites del Gran Moxos": limiteMoxos,
+  "Límite de Pueblos de Moxos": limitePueblosIndigenas,
+  "Territorios Indígenas titulados": territoriosIndigenas,
+  // 2. Contar es sembrar con el corazón (memoria narrada)
+  "Historias, paisajes sonoros y fotos": historias,
+  "Hitos": hitos,
+  // 3. Naturaleza y cambio climático
+  "Ríos": rios,
+  "Incendios": incendios,
+  "Chacos y abundancia": abundancia
 };
 
-L.control.layers(baseLayers, overlays, { collapsed: false }).addTo(map);
+map.layersControl = L.control.layers(baseLayers, overlays, { collapsed: false, position: 'bottomleft' }).addTo(map);
 
 map.removeLayer(rios);
 map.removeLayer(hitos);
 map.removeLayer(territoriosIndigenas);
 map.removeLayer(limiteMoxos);
+map.removeLayer(incendios);
+map.removeLayer(limitePueblosIndigenas);
+map.removeLayer(abundancia);
 
   </script>
 </body>

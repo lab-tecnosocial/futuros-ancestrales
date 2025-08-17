@@ -1,0 +1,89 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sobre Nosotrxs</title>
+
+  <link rel="stylesheet" href="style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+      <nav style="display: flex; justify-content: space-between; align-items: center;">
+  <a href="index.html"><h3>FUTUROS ANCESTRALES</h3></a>    
+      <div class="menu-container">
+      <div class="menu-items">
+        <a class="menu-item" href="nosotrxs.html">Nosotrxs</a>
+        <a class="menu-item" href="cartografias.html">Cartografías anticoloniales</a>
+        <a class="menu-item" href="contacto.html">Contacto</a>
+      </div>
+      <button class="hamburger" aria-label="Abrir menú">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <script>
+      const hamburger = document.querySelector('.hamburger');
+      const menuItems = document.querySelector('.menu-items');
+      hamburger.addEventListener('click', () => {
+        menuItems.classList.toggle('show');
+      });
+    </script>
+    <style>
+    .menu-container {
+      display: flex;
+      align-items: center;
+    }
+    .menu-items {
+      display: flex;
+      gap: 25px;
+      color: white;
+    }
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8em;
+      margin-left: 15px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .menu-items {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: #222;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+        border-radius: 8px;
+        z-index: 1000;
+      }
+      .menu-items.show {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+    }
+    </style>
+    </div>
+  </nav>
+
+  <div class="text-block">
+    <h1 style="font-family: 'Bebas Neue', sans-serif;">Cartografías Anticoloniales</h1>
+    <p style="font-family: 'Roboto Condensed', sans-serif; margin-top: 20px; font-size: 20px;">El mapa de Futuros Ancestrales surge de la urgencia de desmantelar los límites coloniales de la territorialización amazónica desde el arribo misional hasta el presente, para centrar las geografías vivas que nunca dejaron de configurar Moxos. El corazón de este proyecto es desenterrar de entre los escombros los largos procesos de saqueo que se sedimentan lado a lado con una vitalidad irrestricta. Los trazos que aquí presentamos son, entonces, intentos iniciales de actualizar, y en algunos casos reemplazar, información que perpetúa el despojo y la violencia. Este mapa es, por tanto, ambicioso y fluido: no se conforma con refutar la mezquindad de los límites coloniales actuales, sino que fabula la recuperación de lo que nunca dejó de pertenecer a los pueblos. Por ello, este es un proceso fundamentalmente inacabado, en constante construcción, y que rechaza cualquier forma de completitud, especialmente en lo que refiere a procesos legales oficiales. Es, más bien, una puesta en marcha del honrar la soberanía y autonomía de los pueblos indígenas, sus datos, y las representaciones que de ellos emergen para fabulaciones de hoy, ayer y mañana.</p>
+  </div>
+  <!-- Modal for fullscreen images -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-ajax/dist/leaflet.ajax.min.js"></script>
+
+  <script>
+    const isMobile = window.innerWidth <= 768;
+    </script>
+</body>

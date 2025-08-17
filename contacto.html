@@ -1,0 +1,93 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sobre Nosotrxs</title>
+
+  <link rel="stylesheet" href="style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+      <nav style="display: flex; justify-content: space-between; align-items: center;">
+    <a href="index.html"><h3>FUTUROS ANCESTRALES</h3></a>
+    <!-- Hamburger menu for mobile -->
+    <div class="menu-container">
+      <div class="menu-items">
+        <a class="menu-item" href="nosotrxs.html">Nosotrxs</a>
+        <a class="menu-item" href="cartografias.html">Cartografías anticoloniales</a>
+        <a class="menu-item" href="contacto.html">Contacto</a>
+      </div>
+      <button class="hamburger" aria-label="Abrir menú">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <script>
+      const hamburger = document.querySelector('.hamburger');
+      const menuItems = document.querySelector('.menu-items');
+      hamburger.addEventListener('click', () => {
+        menuItems.classList.toggle('show');
+      });
+    </script>
+    <style>
+    .menu-container {
+      display: flex;
+      align-items: center;
+    }
+    .menu-items {
+      display: flex;
+      gap: 25px;
+      color: white;
+    }
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8em;
+      margin-left: 15px;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .menu-items {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: #222;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+        border-radius: 8px;
+        z-index: 1000;
+      }
+      .menu-items.show {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+    }
+    </style>
+    </div>
+  </nav>
+
+<div class="text-block">
+    <h1 style="font-family: 'Bebas Neue', sans-serif;">Contacto</h1>
+    <ul>
+        <li style="font-family: 'Roboto Condensed', sans-serif; margin-top: 20px; font-size: 20px;">Página web: <a href="https://www.jasyrenyhe.com">www.jasyrenyhe.com</a></li>
+        <li style="font-family: 'Roboto Condensed', sans-serif; margin-top: 20px; font-size: 20px;">Email: <a href="mailto:jasyrenyhe@gmail.com">jasyrenyhe@gmail.com</a></li>
+    </ul>
+  </div>
+
+  <!-- Modal for fullscreen images -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-ajax/dist/leaflet.ajax.min.js"></script>
+
+  <script>
+    const isMobile = window.innerWidth <= 768;
+    </script>
+</body>

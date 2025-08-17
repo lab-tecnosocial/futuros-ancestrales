@@ -4,16 +4,20 @@
   <title>Mapa del Gran Moxos. Futuros Ancestrales</title>
 
   <link rel="stylesheet" href="style.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
   <nav style="display: flex; justify-content: space-between; align-items: center;">
-    <a href="index.html"><h3>FUTUROS ANCESTRALES</h3></a>
+    <a href="index.html">
+      <h3>FUTUROS ANCESTRALES</h3>
+    </a>
     <!-- Hamburger menu for mobile -->
     <div class="menu-container">
       <div class="menu-items">
@@ -33,44 +37,49 @@
       });
     </script>
     <style>
-    .menu-container {
-      display: flex;
-      align-items: center;
-    }
-    .menu-items {
-      display: flex;
-      gap: 25px;
-      color: white;
-    }
-    .hamburger {
-      display: none;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.8em;
-      margin-left: 15px;
-      cursor: pointer;
-    }
-    @media (max-width: 768px) {
-      .menu-items {
-        display: none;
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        background: #222;
-        flex-direction: column;
-        gap: 15px;
-        padding: 20px;
-        border-radius: 8px;
-        z-index: 1000;
-      }
-      .menu-items.show {
+      .menu-container {
         display: flex;
+        align-items: center;
       }
+
+      .menu-items {
+        display: flex;
+        gap: 25px;
+        color: white;
+      }
+
       .hamburger {
-        display: block;
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.8em;
+        margin-left: 15px;
+        cursor: pointer;
       }
-    }
+
+      @media (max-width: 768px) {
+        .menu-items {
+          display: none;
+          position: absolute;
+          top: 60px;
+          right: 20px;
+          background: #222;
+          flex-direction: column;
+          gap: 15px;
+          padding: 20px;
+          border-radius: 8px;
+          z-index: 1000;
+        }
+
+        .menu-items.show {
+          display: flex;
+        }
+
+        .hamburger {
+          display: block;
+        }
+      }
     </style>
     </div>
   </nav>
@@ -86,14 +95,14 @@
 
     let map = L.map('mapa', {
       scrollWheelZoom: !isMobile,
-    }).setView([-14.99, -65.63], 10); 
+    }).setView([-14.99, -65.63], 10);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       maxZoom: 20,
       attribution: '&copy; Desarrollado por el <a href="https://labtecnosocial.org/">Lab TecnoSocial</a>'
     }).addTo(map);
 
-// Datos de comunidades
+    // Datos de comunidades
     var comunidades = L.geoJSON.ajax("data/comunidades_mapeadas.geojson", {
       pointToLayer: function (feature, latlng) {
         return L.marker(latlng, { icon: iconComunidad });
@@ -115,7 +124,7 @@
 
     comunidades.addTo(map);
 
-// moxos-historias
+    // moxos-historias
     var historias = L.geoJSON.ajax("data/moxos_historias.geojson", {
       pointToLayer: function (feature, latlng) {
         return L.marker(latlng, { icon: iconHistorias });
@@ -141,10 +150,10 @@
 
     historias.addTo(map);
 
-// datos de rios
+    // datos de rios
     var rios = L.geoJSON.ajax("data/rios_moxos.geojson", {
       style: function (feature) {
-        return { color: '#1E90FF', weight: 1.5 , opacity: 0.3};
+        return { color: '#1E90FF', weight: 1.5, opacity: 0.3 };
       },
       onEachFeature: function (feature, layer) {
         layer.bindPopup(`
@@ -155,7 +164,7 @@
 
     rios.addTo(map);
 
-// datos de hitos
+    // datos de hitos
     var hitos = L.geoJSON.ajax("data/moxos_hitos.geojson", {
       pointToLayer: function (feature, latlng) {
         return L.marker(latlng, { icon: iconHitos });
@@ -176,10 +185,10 @@
 
     hitos.addTo(map);
 
-// datos de areas protegidas
+    // datos de areas protegidas
     var territoriosIndigenas = L.geoJSON.ajax("data/territorios_indigenas.geojson", {
       style: function (feature) {
-        return { color: '#CCC', weight: 1, fillColor: '#32CD32', fillOpacity: 0.2 }; 
+        return { color: '#CCC', weight: 1, fillColor: '#32CD32', fillOpacity: 0.2 };
       },
       onEachFeature: function (feature, layer) {
         layer.bindPopup(`
@@ -190,7 +199,7 @@
 
     territoriosIndigenas.addTo(map);
 
-// datos de limite de moxos
+    // datos de limite de moxos
     var limiteMoxos = L.geoJSON.ajax("data/limite_moxos.geojson", {
       style: function (feature) {
         return { color: '#FF0000', weight: 2, opacity: 0.2 };
@@ -204,7 +213,7 @@
 
     limiteMoxos.addTo(map);
 
-// datos de limite de pueblos indigenas
+    // datos de limite de pueblos indigenas
     var limitePueblosIndigenas = L.geoJSON.ajax("data/limite_pueblos_moxos.geojson", {
       style: function (feature) {
         return { color: '#FF8C00', weight: 2, opacity: 0.2 };
@@ -218,7 +227,7 @@
 
     limitePueblosIndigenas.addTo(map);
 
-// datos de incendios
+    // datos de incendios
     var incendios = L.geoJSON.ajax("data/incendio.geojson", {
       style: function (feature) {
         return { color: '#FF4500', weight: 2, opacity: 0.5 };
@@ -232,54 +241,123 @@
 
     incendios.addTo(map);
 
-// datos de abundancia
-var abundancia = L.geoJSON.ajax("data/abundancia_limpia.geojson", {
-  pointToLayer: function (feature, latlng) {
-    const iconPath = `icons/${feature.properties['extension']}`;
-    const iconAbundancia = L.icon({
-      iconUrl: iconPath,
-      iconSize: [32, 34],
-      iconAnchor: [15, 40],
-      popupAnchor: [0, -35]
-    });
-    return L.marker(latlng, { icon: iconAbundancia });
-  },
-  onEachFeature: function (feature, layer) {
-    layer.bindPopup(`
+    // datos de abundancia
+    var abundancia = L.geoJSON.ajax("data/abundancia_limpia.geojson", {
+      pointToLayer: function (feature, latlng) {
+        const iconPath = `icons/${feature.properties['extension']}`;
+        const iconAbundancia = L.icon({
+          iconUrl: iconPath,
+          iconSize: [32, 34],
+          iconAnchor: [15, 40],
+          popupAnchor: [0, -35]
+        });
+        return L.marker(latlng, { icon: iconAbundancia });
+      },
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`
       <b>${feature.properties['Tipo']}</b>
     `);
-  }
-});
+      }
+    });
 
-abundancia.addTo(map);
+    abundancia.addTo(map);
 
-// Control de capas
-const baseLayers = {};
+    // Control de capas personalizado
+    const CustomLayerControl = L.Control.extend({
+      options: {
+        position: 'bottomleft'
+      },
 
-const overlays = {
-  // 1. Geo-grafías: La historia que narra la tierra
-  "Comunidades": comunidades,
-  "Límites del Gran Moxos": limiteMoxos,
-  "Límite de Pueblos de Moxos": limitePueblosIndigenas,
-  "Territorios Indígenas titulados": territoriosIndigenas,
-  // 2. Contar es sembrar con el corazón (memoria narrada)
-  "Historias, paisajes sonoros y fotos": historias,
-  "Hitos": hitos,
-  // 3. Naturaleza y cambio climático
-  "Ríos": rios,
-  "Incendios": incendios,
-  "Chacos y abundancia": abundancia
-};
+      onAdd: function (map) {
+        const container = L.DomUtil.create('div', 'leaflet-control-layers custom-layer-control');
 
-map.layersControl = L.control.layers(baseLayers, overlays, { collapsed: false, position: 'bottomleft' }).addTo(map);
+        container.innerHTML = `
+      <div class="layer-control-content">
+        <div class="layer-section">
+          <div class="layer-section-title">1. Geo-grafías: La historia que narra la tierra</div>
+          <label class="layer-item">
+            <input type="checkbox" data-layer="comunidades" checked> Comunidades
+          </label>
+          <label class="layer-item">
+            <input type="checkbox" data-layer="limiteMoxos"> Límites del Gran Moxos
+          </label>
+          <label class="layer-item">
+            <input type="checkbox" data-layer="limitePueblosIndigenas"> Límite de Pueblos de Moxos
+          </label>
+          <label class="layer-item">
+            <input type="checkbox" data-layer="territoriosIndigenas"> Territorios Indígenas titulados
+          </label>
+        </div>
+        
+        <div class="layer-section">
+          <div class="layer-section-title">2. Contar es sembrar con el corazón (memoria narrada)</div>
+          <label class="layer-item">
+            <input type="checkbox" data-layer="historias" checked> Historias, paisajes sonoros y fotos
+          </label>
+          <label class="layer-item">
+            <input type="checkbox" data-layer="hitos"> Hitos
+          </label>
+        </div>
+        
+        <div class="layer-section">
+          <div class="layer-section-title">3. Naturaleza y cambio climático</div>
+          <label class="layer-item">
+            <input type="checkbox" data-layer="rios"> Ríos
+          </label>
+          <label class="layer-item">
+            <input type="checkbox" data-layer="incendios"> Incendios
+          </label>
+          <label class="layer-item">
+            <input type="checkbox" data-layer="abundancia"> Chacos y abundancia
+          </label>
+        </div>
+      </div>
+    `;
 
-map.removeLayer(rios);
-map.removeLayer(hitos);
-map.removeLayer(territoriosIndigenas);
-map.removeLayer(limiteMoxos);
-map.removeLayer(incendios);
-map.removeLayer(limitePueblosIndigenas);
-map.removeLayer(abundancia);
+        // Prevenir que los clics en el control se propaguen al mapa
+        L.DomEvent.disableClickPropagation(container);
+        L.DomEvent.disableScrollPropagation(container);
+
+        // Manejar los checkboxes
+        const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+        const layerMap = {
+          'comunidades': comunidades,
+          'limiteMoxos': limiteMoxos,
+          'limitePueblosIndigenas': limitePueblosIndigenas,
+          'territoriosIndigenas': territoriosIndigenas,
+          'historias': historias,
+          'hitos': hitos,
+          'rios': rios,
+          'incendios': incendios,
+          'abundancia': abundancia
+        };
+
+        checkboxes.forEach(checkbox => {
+          checkbox.addEventListener('change', function () {
+            const layerName = this.getAttribute('data-layer');
+            const layer = layerMap[layerName];
+
+            if (this.checked) {
+              map.addLayer(layer);
+            } else {
+              map.removeLayer(layer);
+            }
+          });
+        });
+
+        return container;
+      }
+    });
+
+    map.layersControl = new CustomLayerControl().addTo(map);
+
+    map.removeLayer(rios);
+    map.removeLayer(hitos);
+    map.removeLayer(territoriosIndigenas);
+    map.removeLayer(limiteMoxos);
+    map.removeLayer(incendios);
+    map.removeLayer(limitePueblosIndigenas);
+    map.removeLayer(abundancia);
 
   </script>
 </body>

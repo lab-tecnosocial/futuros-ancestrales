@@ -131,9 +131,80 @@ h3 {
     max-width: 800px;
     text-align: left;
 }
+
+/* Control de capas personalizado */
+.custom-layer-control {
+    background: #2E593E !important;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid #D19A30;
+    max-width: 280px;
+}
+
+/* Asegurar que los estilos de Leaflet no interfieran */
+.leaflet-control-layers.custom-layer-control {
+    background: #2E593E !important;
+}
+
+.layer-control-content {
+    padding: 15px;
+}
+
+.layer-section {
+    margin-bottom: 15px;
+}
+
+.layer-section:last-child {
+    margin-bottom: 0;
+}
+
+.layer-section-title {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 14px;
+    color: #D19A30;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #D19A30;
+    line-height: 1.2;
+}
+
+.layer-item {
+    display: flex;
+    align-items: center;
+    margin: 6px 0;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 13px;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.layer-item:hover {
+    color: #D19A30;
+}
+
+.layer-item input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: #D19A30;
+    transform: scale(1.1);
+}
+
 /* Ajustes para dispositivos móviles */
 @media only screen and (max-width: 700px) {
     .text-block {
         padding: 1.5em;
+    }
+
+    .custom-layer-control {
+        max-width: 250px;
+        font-size: 12px;
+    }
+
+    .layer-section-title {
+        font-size: 12px;
+    }
+
+    .layer-item {
+        font-size: 11px;
     }
 }

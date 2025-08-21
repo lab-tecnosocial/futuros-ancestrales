@@ -83,7 +83,22 @@
     </style>
     </div>
   </nav>
-
+  <div id="lab-modal" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(30,30,30,0.95);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:2000;">
+    <div class="text-block" style="text-align: center; font-family: 'Roboto Condensed', sans-serif; font-size: 20px;">
+       Estos son los Futuros Ancestrales. Este mapa busca honrar la soberanía y autonomía de los pueblos indígenas, sus datos, y las representaciones que de ellos emergen para fabulaciones de hoy, ayer y mañana.
+    </div>
+    <button id="close-modal" style="font-family: 'Roboto Condensed'; padding:12px 32px;font-size:20px;background:#2E593E;color:#fff;border:none;border-radius:6px;cursor:pointer;">
+      Continuar
+    </button>
+  </div>
+  <script>
+    document.getElementById('close-modal').onclick = function() {
+      document.getElementById('lab-modal').style.display = 'none';
+      document.getElementById('mapa').style.display = '';
+    };
+    // Oculta el mapa mientras el modal está abierto
+    document.getElementById('mapa').style.display = 'none';
+  </script>
   <div id="mapa"></div>
 
   <!-- Modal for fullscreen images -->
@@ -343,10 +358,10 @@
             <input type="checkbox" data-layer="limiteMoxos"> Límites del Gran Moxos
           </label>
           <label class="layer-item">
-            <input type="checkbox" data-layer="limitePueblosIndigenas"> Límite de Pueblos de Moxos
+            <input type="checkbox" data-layer="limitePueblosIndigenas"> Territorios ancestrales amazónicos
           </label>
           <label class="layer-item">
-            <input type="checkbox" data-layer="territoriosIndigenas"> Territorios Indígenas titulados
+            <input type="checkbox" data-layer="territoriosIndigenas"> Tierra indígena titulada
           </label>
         </div>
         
@@ -356,14 +371,14 @@
             <input type="checkbox" data-layer="historias" checked> Historias, paisajes sonoros y fotos
           </label>
           <label class="layer-item">
-            <input type="checkbox" data-layer="hitos"> Hitos
+            <input type="checkbox" data-layer="hitos"> Casas de memoria
           </label>
         </div>
         
         <div class="layer-section">
           <div class="layer-section-title">3. Naturaleza y cambio climático</div>
           <label class="layer-item">
-            <input type="checkbox" data-layer="rios"> Ríos
+            <input type="checkbox" data-layer="rios"> Nuestros ríos y agua
           </label>
           <label class="layer-item">
             <input type="checkbox" data-layer="incendios"> Incendios
@@ -442,6 +457,5 @@
       // Actualizar contador
       counter.textContent = `${currentSlide + 1} / ${slides.length}`;
     };
-
   </script>
 </body>

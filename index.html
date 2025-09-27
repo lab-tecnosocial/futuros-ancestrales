@@ -28,7 +28,7 @@
         <a class="menu-item" href="nosotrxs.html">Nosotrxs</a>
         <a class="menu-item" href="cartografias.html">Cartografías anticoloniales</a>
         <a class="menu-item" href="contacto.html">Contacto</a>
-        <a class="menu-item" onclick="window.location.href='https://translate.google.com/translate?hl=en&sl=es&u='+encodeURIComponent(window.location.href);" rel="nofollow">Spa/Eng</a>
+        <a class="menu-item" onclick="const lang = window.navigator.language.startsWith('es') ? 'en' : 'es'; document.documentElement.setAttribute('lang', lang);">Translate</a>
       </div>
       <button class="hamburger" aria-label="Abrir menú">
         <i class="fas fa-bars"></i>
@@ -322,6 +322,20 @@
     });
 
     incendios.addTo(map);
+
+    // datos de inundaciones
+    var inundaciones = L.geoJSON.ajax("data/inundaciones.geojson", {
+      style: function (feature) {
+        return { color: '#1E90FF', weight: 2, opacity: 0.5 };
+      },
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`
+          <b>Inundación: </b>${feature.properties['NOMBRE']}
+        `);
+      }
+    });
+
+    inundaciones.addTo(map);
 
     // datos de abundancia
     var abundancia = L.geoJSON.ajax("data/abundancia_limpia.geojson", {

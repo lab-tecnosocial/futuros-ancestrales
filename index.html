@@ -5,8 +5,9 @@
   <meta property="og:image" content="https://lab-tecnosocial.github.io/preview.png" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Mapa de Moxos - Futuros Ancestrales" />
-  <meta property="og:description" content="Este mapa honra la soberanía y autonomía de los pueblos indígenas de Moxos."/>
-  
+  <meta property="og:description"
+    content="Este mapa honra la soberanía y autonomía de los pueblos indígenas de Moxos." />
+
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +29,7 @@
         <a class="menu-item" href="nosotrxs.html">Nosotrxs</a>
         <a class="menu-item" href="cartografias.html">Cartografías anticoloniales</a>
         <a class="menu-item" href="contacto.html">Contacto</a>
-        <a class="menu-item" onclick="const lang = window.navigator.language.startsWith('es') ? 'en' : 'es'; document.documentElement.setAttribute('lang', lang);">Translate</a>
+        <a class="menu-item" id="translate-btn" onclick="translatePage()">Translate</a>
       </div>
       <button class="hamburger" aria-label="Abrir menú">
         <i class="fas fa-bars"></i>
@@ -89,16 +90,19 @@
     </style>
     </div>
   </nav>
-  <div id="lab-modal" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(30,30,30,0.95);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:2000;">
+  <div id="lab-modal"
+    style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(30,30,30,0.95);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:2000;">
     <div class="text-block" style="text-align: center; font-family: 'Roboto Condensed', sans-serif; font-size: 20px;">
-       Estos son los Futuros Ancestrales. Este mapa busca honrar la soberanía y autonomía de los pueblos indígenas, sus datos, y las representaciones que de ellos emergen para fabulaciones de hoy, ayer y mañana.
+      Estos son los Futuros Ancestrales. Este mapa busca honrar la soberanía y autonomía de los pueblos indígenas, sus
+      datos, y las representaciones que de ellos emergen para fabulaciones de hoy, ayer y mañana.
     </div>
-    <button id="close-modal" style="font-family: 'Roboto Condensed'; padding:12px 32px;font-size:20px;background:#2E593E;color:#fff;border:none;border-radius:6px;cursor:pointer;">
+    <button id="close-modal"
+      style="font-family: 'Roboto Condensed'; padding:12px 32px;font-size:20px;background:#2E593E;color:#fff;border:none;border-radius:6px;cursor:pointer;">
       Continuar
     </button>
   </div>
   <script>
-    document.getElementById('close-modal').onclick = function() {
+    document.getElementById('close-modal').onclick = function () {
       document.getElementById('lab-modal').style.display = 'none';
       document.getElementById('mapa').style.display = '';
     };
@@ -477,5 +481,10 @@
       // Actualizar contador
       counter.textContent = `${currentSlide + 1} / ${slides.length}`;
     };
+
+
   </script>
+
+  <!-- Script de traducción -->
+  <script src="translate.js"></script>
 </body>

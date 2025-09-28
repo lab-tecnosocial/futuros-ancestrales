@@ -118,6 +118,26 @@
   <script>
     const isMobile = window.innerWidth <= 768;
 
+    // Obtener la URL base del sitio web
+    const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/');
+
+    // Función helper para construir URLs de datos
+    function getDataUrl(filename) {
+      return baseUrl + 'data/' + filename;
+    }
+
+    // Función helper para construir URLs de iconos
+    function getIconUrl(filename) {
+      return baseUrl + 'icons/' + filename;
+    }
+
+    // Función para manejar errores de carga
+    function handleLoadError(layerName, url) {
+      console.error(`Error cargando ${layerName} desde: ${url}`);
+      // Opcional: mostrar mensaje al usuario
+      // alert(`Error cargando datos de ${layerName}. Por favor contacta al administrador.`);
+    }
+
     let map = L.map('mapa', {
       scrollWheelZoom: !isMobile,
     }).setView([-14.99, -65.63], 10);
@@ -128,7 +148,7 @@
     }).addTo(map);
 
     // Datos de comunidades
-    var comunidades = L.geoJSON.ajax("data/comunidades_mapeadas.geojson", {
+    var comunidades = L.geoJSON.ajax(getDataUrl("comunidades_mapeadas.geojson"), {
       pointToLayer: function (feature, latlng) {
         return L.marker(latlng, { icon: iconComunidad });
       },
@@ -138,10 +158,14 @@
           <b>Entidad territorial: </b>${feature.properties['entidad_te']}
         `);
       }
+    }).on('data:loaded', function () {
+      console.log('Comunidades cargadas correctamente');
+    }).on('data:loading', function () {
+      console.log('Cargando comunidades...');
     });
 
     const iconComunidad = L.icon({
-      iconUrl: 'icons/casa.png',
+      iconUrl: getIconUrl('casa.png'),
       iconSize: [36, 38],
       iconAnchor: [15, 40],
       popupAnchor: [0, -35]
@@ -150,7 +174,7 @@
     comunidades.addTo(map);
 
     // moxos-historias
-    var historias = L.geoJSON.ajax("data/moxos_historias.geojson", {
+    var historias = L.geoJSON.ajax(getDataUrl("moxos_historias.geojson"), {
       pointToLayer: function (feature, latlng) {
         return L.marker(latlng, { icon: iconHistorias });
       },
@@ -198,7 +222,7 @@
     });
 
     const iconHistorias = L.icon({
-      iconUrl: 'icons/historia.png',
+      iconUrl: getIconUrl('historia.png'),
       iconSize: [30, 32],
       iconAnchor: [15, 40],
       popupAnchor: [0, -35]
@@ -207,7 +231,7 @@
     historias.addTo(map);
 
     // datos de rios
-    var rios = L.geoJSON.ajax("data/rios_moxos.geojson", {
+    var rios = L.geoJSON.ajax(getDataUrl("rios_moxos.geojson"), {
       style: function (feature) {
         return { color: '#1E90FF', weight: 1.5, opacity: 0.3 };
       },
@@ -221,7 +245,7 @@
     rios.addTo(map);
 
     // datos de hitos
-    var hitos = L.geoJSON.ajax("data/moxos_hitos.geojson", {
+    var hitos = L.geoJSON.ajax(getDataUrl("moxos_hitos.geojson"), {
       pointToLayer: function (feature, latlng) {
         return L.marker(latlng, { icon: iconHitos });
       },
@@ -233,7 +257,7 @@
     });
 
     const iconHitos = L.icon({
-      iconUrl: 'icons/hito.png',
+      iconUrl: getIconUrl('hito.png'),
       iconSize: [38, 40],
       iconAnchor: [15, 40],
       popupAnchor: [0, -35]
@@ -242,7 +266,7 @@
     hitos.addTo(map);
 
     // datos de areas protegidas
-    var territoriosIndigenas = L.geoJSON.ajax("data/territorios_indigenas.geojson", {
+    var territoriosIndigenas = L.geoJSON.ajax(getDataUrl("territorios_indigenas.geojson"), {
       style: function (feature) {
         // Paleta de colores suaves pero diferenciados para cada territorio
         const colorPalette = {
@@ -286,7 +310,7 @@
     territoriosIndigenas.addTo(map);
 
     // datos de limite de moxos
-    var limiteMoxos = L.geoJSON.ajax("data/limite_moxos.geojson", {
+    var limiteMoxos = L.geoJSON.ajax(getDataUrl("limite_moxos.geojson"), {
       style: function (feature) {
         return { color: '#FF0000', weight: 2, opacity: 0.2 };
       },
@@ -300,7 +324,7 @@
     limiteMoxos.addTo(map);
 
     // datos de limite de pueblos indigenas
-    var limitePueblosIndigenas = L.geoJSON.ajax("data/limite_pueblos_moxos.geojson", {
+    var limitePueblosIndigenas = L.geoJSON.ajax(getDataUrl("limite_pueblos_moxos.geojson"), {
       style: function (feature) {
         return { color: '#FF8C00', weight: 2, opacity: 0.2 };
       },
@@ -314,7 +338,7 @@
     limitePueblosIndigenas.addTo(map);
 
     // datos de incendios
-    var incendios = L.geoJSON.ajax("data/incendio.geojson", {
+    var incendios = L.geoJSON.ajax(getDataUrl("incendio.geojson"), {
       style: function (feature) {
         return { color: '#FF4500', weight: 2, opacity: 0.5 };
       },
@@ -328,7 +352,7 @@
     incendios.addTo(map);
 
     // datos de inundaciones
-    var inundaciones = L.geoJSON.ajax("data/inundaciones.geojson", {
+    var inundaciones = L.geoJSON.ajax(getDataUrl("inundaciones.geojson"), {
       style: function (feature) {
         return { color: '#1E90FF', weight: 2, opacity: 0.5 };
       },
@@ -342,9 +366,9 @@
     inundaciones.addTo(map);
 
     // datos de abundancia
-    var abundancia = L.geoJSON.ajax("data/abundancia_limpia.geojson", {
+    var abundancia = L.geoJSON.ajax(getDataUrl("abundancia_limpia.geojson"), {
       pointToLayer: function (feature, latlng) {
-        const iconPath = `icons/${feature.properties['extension']}`;
+        const iconPath = getIconUrl(feature.properties['extension']);
         const iconAbundancia = L.icon({
           iconUrl: iconPath,
           iconSize: [32, 34],

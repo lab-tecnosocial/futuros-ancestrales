@@ -86,7 +86,7 @@
   </nav>
 
   <div class="text-block">
-    <img src="icons/portada.jpeg" style="width: 100%; margin-bottom: 1em;">
+    <img id="portada-img" style="width: 100%; margin-bottom: 1em;">
     <h1 style="font-family: 'Bebas Neue', sans-serif;">Nosotrxs</h1>
     <p style="font-family: 'Roboto Condensed', sans-serif; margin-top: 20px; font-size: 20px;">Este mapa germina en los
       andares de libertad de las y los jóvenes de Moxos por sus vastos territorios. En más de un sentido, delinea el
@@ -107,6 +107,9 @@
   <script>
     const isMobile = window.innerWidth <= 768;
 
+    // Configurar URL base y cargar imagen de portada
+    const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/');
+    document.getElementById('portada-img').src = baseUrl + 'icons/portada.jpeg';
 
   </script>
 

@@ -14,7 +14,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -101,19 +102,22 @@
       Continuar
     </button>
   </div>
+  <div id="mapa"></div>
   <script>
+    // Se oculta con visibility y no con display: así el contenedor conserva su tamaño
+    // y Leaflet/MapLibre se inicializan con las dimensiones correctas detrás del modal.
     document.getElementById('close-modal').onclick = function () {
       document.getElementById('lab-modal').style.display = 'none';
-      document.getElementById('mapa').style.display = '';
+      document.getElementById('mapa').style.visibility = '';
     };
-    // Oculta el mapa mientras el modal está abierto
-    document.getElementById('mapa').style.display = 'none';
+    document.getElementById('mapa').style.visibility = 'hidden';
   </script>
-  <div id="mapa"></div>
 
   <!-- Modal for fullscreen images -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet-ajax/dist/leaflet.ajax.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-ajax@2.1.0/dist/leaflet.ajax.min.js"></script>
+  <script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
+  <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.1.4/leaflet-maplibre-gl.js"></script>
 
   <script>
     const isMobile = window.innerWidth <= 768;
@@ -142,10 +146,15 @@
       scrollWheelZoom: !isMobile,
     }).setView([-14.99, -65.63], 10);
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      maxZoom: 20,
-      attribution: '&copy; Desarrollado por el <a href="https://labtecnosocial.org/">Lab TecnoSocial</a>'
+    // Mapa base Voyager en vector: el raster de CARTO pasó a exigir API key (ago. 2026)
+    // y devuelve las teselas con marca de agua. El estilo vectorial sigue siendo libre.
+    L.maplibreGL({
+      style: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json'
     }).addTo(map);
+
+    map.attributionControl.addAttribution(
+      'Desarrollado por el <a href="https://labtecnosocial.org/">Lab TecnoSocial</a>'
+    );
 
     // Datos de comunidades
     var comunidades = L.geoJSON.ajax(getDataUrl("comunidades_mapeadas.geojson"), {
@@ -432,6 +441,9 @@
             <input type="checkbox" data-layer="incendios"> Incendios
           </label>
           <label class="layer-item">
+            <input type="checkbox" data-layer="inundaciones"> Inundaciones
+          </label>
+          <label class="layer-item">
             <input type="checkbox" data-layer="abundancia"> Chacos y abundancia
           </label>
         </div>
@@ -453,6 +465,7 @@
           'hitos': hitos,
           'rios': rios,
           'incendios': incendios,
+          'inundaciones': inundaciones,
           'abundancia': abundancia
         };
 
@@ -480,6 +493,7 @@
     map.removeLayer(territoriosIndigenas);
     map.removeLayer(limiteMoxos);
     map.removeLayer(incendios);
+    map.removeLayer(inundaciones);
     map.removeLayer(limitePueblosIndigenas);
     map.removeLayer(abundancia);
 
